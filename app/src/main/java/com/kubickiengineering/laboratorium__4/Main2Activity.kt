@@ -1,12 +1,18 @@
 package com.kubickiengineering.laboratorium__4
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.URL
+import kotlin.concurrent.thread
+
 
 class Main2Activity : AppCompatActivity() {
 
@@ -25,5 +31,35 @@ class Main2Activity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        thread(true) {
+
+            val yahoo = URL("http://google.com/")
+            val `in` = BufferedReader(
+                InputStreamReader(
+                    yahoo.openStream()
+                )
+            )
+
+            var inputLine: String = ""
+
+            while (`in`.readLine().also({
+
+                   if (it!=null) inputLine = it
+                }) != null) {
+                println(inputLine)
+            }
+
+            `in`.close()
+
+            runOnUiThread {
+                println(inputLine)
+                Toast.makeText(this, inputLine, Toast.LENGTH_LONG).show()
+            }
+
+        }
     }
 }
