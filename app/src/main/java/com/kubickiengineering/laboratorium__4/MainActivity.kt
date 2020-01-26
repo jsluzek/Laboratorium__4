@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action") {
+            Snackbar.make(view, "Zmien na swoja akcje", Snackbar.LENGTH_LONG)
+                .setAction("Nowy ekran!") {
                     startActivity(Intent(this@MainActivity, Main2Activity::class.java))
                 }
                 .show()
